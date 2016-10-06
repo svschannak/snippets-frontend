@@ -6,6 +6,8 @@
     "react-scripts": "0.6.1"
   },
   "dependencies": {
+    "draft-js": "^0.9.1",
+    "draft-js-prism": "^1.0.3",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "whatwg-fetch": "^1.0.0"

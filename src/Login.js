@@ -29,7 +29,7 @@ export default class Login extends Component {
     }).then(function(response) {
       return response.text();
     }).then(function(response) {
-      self.props.setLoggedInUser(response.replace('"', ""));
+      self.props.setLoggedInUser(response.replace(/"/g, ""));
     });
   };
 

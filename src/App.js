@@ -21,8 +21,17 @@ class App extends Component {
     }
   }
 
+  logout(){
+    this.setState({
+      isLoggedIn: 'not set',
+      currentUser: ''
+    });
+    sessionStorage.removeItem("snippet-user-token");
+  }
+
   setLoggedInUser(token){
     this.setState({
+
       isLoggedIn: true,
       currentUser: token
     });
@@ -33,7 +42,7 @@ class App extends Component {
   render() {
     if (this.state.isLoggedIn == true) {
       return (
-        <SnippetManager currentUser={this.state.currentUser}/>
+        <SnippetManager currentUser={this.state.currentUser} logout={this.logout.bind(this)}/>
       );
     } else {
       return (
