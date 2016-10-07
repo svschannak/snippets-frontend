@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import URL from './Conf.js';
 import SnippetList from './SnippetList.js'
+//import PrismEditor from './PrismEditor.js'
 import SnippetEditor from './SnippetEditor.js'
 import 'whatwg-fetch';
+import BlockStyleControls from './BlockStyleControls.js';
 
 export default class SnippetManager extends Component {
   constructor(){
