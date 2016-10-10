@@ -1,9 +1,11 @@
 .RichEditor-root {
     background: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     font-family: 'Georgia', serif;
     font-size: 14px;
     padding: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
 .RichEditor-editor {
@@ -48,14 +50,20 @@
     font-size: 14px;
     margin-bottom: 5px;
     user-select: none;
+    text-align: right;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #a3a3a3;
 }
 
 .RichEditor-styleButton {
-    color: #999;
+    background-color: #e3e3e3;
+    color: #000;
     cursor: pointer;
-    margin-right: 16px;
-    padding: 2px 0;
+    margin-right: 5px;
+    padding: 5px;
     display: inline-block;
+    border: 1px solid #a3a3a3;
+    font-size: 0.8em;
 }
 
 .RichEditor-activeButton {

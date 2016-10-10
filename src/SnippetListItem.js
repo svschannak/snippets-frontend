@@ -6,8 +6,6 @@ export default class SnippetListItem extends Component {
     return(
       <li>
         <span>{this.props.snippet.name}</span>
-        <br/>
-        <span>{this.props.snippet.content}</span>
         <hr/>
       </li>
     )

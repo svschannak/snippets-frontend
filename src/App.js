@@ -31,7 +31,6 @@ class App extends Component {
 
   setLoggedInUser(token){
     this.setState({
-
       isLoggedIn: true,
       currentUser: token
     });
