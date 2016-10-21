@@ -27,14 +27,12 @@ export default class SnippetEditor extends Component {
     // });
     //
     // console.log(this.props);
-    console.log(this.props.language);
     var decorator = new PrismDraftDecorator({defaultSyntax: this.props.language});
     this.state = {
       editorState: EditorState.createEmpty(decorator),
       editorEnabled: true,
       placeholder: 'Write your note...',
     };
-
   }
 
   onChange = (editorState, callback = null) => {
@@ -124,6 +122,18 @@ export default class SnippetEditor extends Component {
     );
   };
 
+  componentWillReceiveProps(newProps){
+    if(newProps.content != null){
+      var decorator = new PrismDraftDecorator({defaultSyntax: this.props.language});
+      let content = JSON.parse(newProps.content);
+      this.setState({
+        editorState: EditorState.createWithContent(convertFromRaw(content), decorator),
+      })
+    }
+
+    this.is_new = newProps.current_id == null;
+  };
+
   saveSnippet = () => {
     let raw_content = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
     this.props.saveSnippet(raw_content);
@@ -143,6 +153,7 @@ export default class SnippetEditor extends Component {
           editorState={editorState}
           onToggle={this.toggleBlockType.bind(this)}
           saveSnippet={this.saveSnippet}
+          is_new={this.is_new}
         />
         <Editor
           blockStyleFn={this.getBlockStyle}

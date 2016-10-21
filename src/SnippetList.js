@@ -7,7 +7,7 @@ export default class SnippetList extends Component {
     return(
       <ul>
         {this.props.snippetList.map(function(snippet){
-          return <SnippetListItem key={snippet.pk} snippet={snippet} />
+          return <SnippetListItem key={snippet.pk} snippet={snippet} changeCurrentSnippet={this.props.changeCurrentSnippet} />
         }, this)}
       </ul>
     )

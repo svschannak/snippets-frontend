@@ -13,6 +13,10 @@ const BLOCK_TYPES = [
 export default class BlockStyleControls extends Component {
 
   render(){
+    let save_text = "Update Snippet";
+    if(this.props.is_new){
+      save_text = "Save Snippet"
+    }
     return (
       <div className="RichEditor-controls">
         {BLOCK_TYPES.map((type) =>
@@ -25,7 +29,7 @@ export default class BlockStyleControls extends Component {
           />
         )}
 
-        || <button className="btn" onClick={this.props.saveSnippet}>Save Snippet</button>
+        || <button className="btn" onClick={this.props.saveSnippet}>{save_text}</button>
       </div>
     );
 

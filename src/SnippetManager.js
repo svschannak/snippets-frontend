@@ -10,9 +10,10 @@ export default class SnippetManager extends Component {
     super();
     this.state = {
       snippet_list: [],
-      current_content: [],
+      current_content: null,
       current_name: '',
-      current_language: 'javascript'
+      current_language: 'javascript',
+      current_id: null
     }
   }
   componentWillMount(){
@@ -23,6 +24,7 @@ export default class SnippetManager extends Component {
     })
       .then(function(response) {
         var snippet_list = JSON.parse(response)['results'].map(function(snippet) {
+          console.log(snippet);
           return snippet;
         });
         self.setState({
@@ -30,6 +32,18 @@ export default class SnippetManager extends Component {
         });
     });
   }
+
+  changeCurrentSnippet = (id, name, content, language) => {
+    console.log('change snippet');
+    this.setState(
+      {
+        current_id: id,
+        current_content: content,
+        current_name: name,
+        current_language: language
+      }
+    )
+  };
 
   editCurrentName = (value) => {
     this.setState({
@@ -43,9 +57,13 @@ export default class SnippetManager extends Component {
       'content': snippet_content,
       'language': this.state.current_language
     };
-
+    let save_method = 'POST';
+    if (this.state.current_id != null){
+      save_method = 'PUT';
+      dataset['snippet_id'] = this.state.current_id;
+    }
     fetch(URL + 'snippets/?token=' + this.props.currentUser,{
-      method: 'POST',
+      method: save_method,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -70,7 +88,7 @@ export default class SnippetManager extends Component {
     return(
       <div className="container-fluid" style={styleMap}>
         <div className="col-md-3">
-          <SnippetList snippetList={this.state.snippet_list} />
+          <SnippetList snippetList={this.state.snippet_list} changeCurrentSnippet={this.changeCurrentSnippet} />
         </div>
         <div className="col-md-7">
           <div className="row">
@@ -84,7 +102,7 @@ export default class SnippetManager extends Component {
               </select>
             </div>
           </div>
-          <SnippetEditor saveSnippet={this.saveCurrentSnippet} language={this.state.current_language}/>
+          <SnippetEditor saveSnippet={this.saveCurrentSnippet} current_id={this.state.current_id} language={this.state.current_language} content={this.state.current_content} />
         </div>
         <div className="col-md-2">
           <button className="btn btn-block" onClick={this.props.logout.bind(this)}>Logout</button>
